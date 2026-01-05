@@ -5,7 +5,7 @@ script:
   - git clone https://github.com/MidnightCommander/mc/
   - cd mc
   - ./autogen.sh
-  - ./configure
+  - ./configure --with-screen=ncurses --enable-werror
   - DESTDIR=$PWD/../AppDir make install
   - cd ../AppDir
   - wget -c https://github.com/MidnightCommander/trac-archive/raw/master/attachments/ticket/4079/mc.svg -O mc.svg
