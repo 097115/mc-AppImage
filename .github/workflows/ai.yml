@@ -14,15 +14,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: install dependencies
+      - name: update
         run: |
           sudo apt-get update
           sudo apt-get install -y autoconf automake libtool pkg-config glib-2.0 gettext libncurses6 libgpm2 libssh2-1 libaspell15 libext2fs2
-      - name: configure
-        run: meson Build . -Dwith-proxy=no -Dwith-bot=no -Dwith-otr=no -Dwith-capsicum=no
       - name: build
-        run: DESTDIR=$PWD/AppDir ninja -C Build install
-      - name: Build AppImage
         uses: AppImageCrafters/build-appimage-action@master
         with:
           recipe: AppImageBuilder.yml
@@ -30,3 +26,9 @@ jobs:
         with:
           name: AppImage
           path: './*.AppImage*'
+      - name: release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: mc-*AppImage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
