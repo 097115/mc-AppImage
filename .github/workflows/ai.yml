@@ -14,10 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: update
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y autoconf automake libtool pkg-config glib-2.0 gettext libncurses6 libgpm2 libssh2-1 libaspell15 libext2fs2
       - name: build
         uses: AppImageCrafters/build-appimage-action@master
         with:
