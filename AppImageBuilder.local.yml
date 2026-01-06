@@ -34,16 +34,6 @@ AppDir:
     - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security universe
     - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security multiverse
     - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted
-        universe multiverse
-    - sourceline: deb https://ppa.launchpadcontent.net/polslinux/otpclient/ubuntu/
-        jammy main
-    - sourceline: deb https://ppa.launchpadcontent.net/hluk/copyq/ubuntu/ jammy main
-    - sourceline: deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg]
-        https://pkg.cloudflareclient.com/ jammy main
-    - sourceline: deb https://ppa.launchpadcontent.net/lubuntu-dev/backports/ubuntu/
-        jammy main
-    - sourceline: deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg
-        arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
     include:
     - libc6:amd64
     - libssh2-1:amd64
