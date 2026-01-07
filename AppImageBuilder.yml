@@ -32,10 +32,10 @@ AppDir:
     include: []
     exclude:
     - usr/share/man
-    - usr/share/doc/*/README.*
-    - usr/share/doc/*/changelog.*
-    - usr/share/doc/*/NEWS.*
-    - usr/share/doc/*/TODO.*
+    - usr/share/doc
+  runtime:
+    path_mappings:
+      - /usr/local/:$APPDIR/usr/local/
   test:
     fedora-30:
       image: appimagecrafters/tests-env:fedora-30
