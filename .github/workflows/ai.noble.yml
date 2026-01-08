@@ -1,0 +1,42 @@
+name: C/C++ AppImage @ noble
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - "*noble"
+jobs:
+  build-appimage:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: build
+        run: |
+          sudo apt-get update && sudo apt-get install -y autoconf autopoint check gettext libtool pkg-config e2fslibs-dev libaspell-dev libglib2.0-dev libgpm-dev libncurses5-dev libslang2-dev libssh2-1-dev libx11-dev unzip
+          git clone https://github.com/MidnightCommander/mc/
+          cd mc
+          ./autogen.sh
+          ./configure --with-screen=ncurses --enable-werror
+          DESTDIR=$PWD/../AppDir make install
+          cd ../AppDir
+          wget -c https://github.com/MidnightCommander/trac-archive/raw/master/attachments/ticket/4079/mc.svg -O mc.svg
+          mkdir -p usr/share/icons/hicolor/256x256/apps
+          cp mc.svg usr/share/icons/hicolor/256x256/apps
+      - name: pack
+        uses: AppImageCrafters/build-appimage-action@master
+        with:
+          recipe: AppImageBuilder.noble.yml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AppImage
+          path: './*.AppImage*'
+      - name: release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: mc-*AppImage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -38,7 +38,8 @@ AppDir:
     - libc6:amd64
     - libssh2-1:amd64
   files:
-    include: []
+    include:
+    - /lib64/ld-linux-x86-64.so.2
     exclude:
     - usr/share/man
     - usr/share/doc
